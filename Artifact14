@@ -1,0 +1,6 @@
+#Artifact 14: Patchlist, all applied or installed patches on the machine + Date of installation
+
+
+$Output = '"' + ((Get-Hotfix) | Select-Object Description, InstalledOn | Out-String).Replace('"', "'")  + '",'
+$Output = $Output.Replace("`n", '; ').Replace("`r", '')
+return $Output
