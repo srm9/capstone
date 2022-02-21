@@ -1,0 +1,10 @@
+
+#Artifact 16: Are removable devices allowed
+
+
+$reg = Get-ItemProperty "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\RemovableStorageDevices" -ErrorAction SilentlyContinue
+If (($reg -ne $null) -and ($reg.Length -ne 0)) {
+    	Return Write-Host 'Removable storage devices restricted to Administrators' 
+  }
+  else
+	{Return Write-Host 'Removable storage devices not restricted'}
