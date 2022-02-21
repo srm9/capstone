@@ -1,0 +1,21 @@
+$SoftwareList = Get-ChildItem "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall"
+
+foreach($obj in $SoftwareList -ne $null){
+    if($obj.getvalue('displayname') -ne $null) {
+        $Output += '"' + $obj.GetValue('DisplayName').Replace('"', "'") + '","'
+    }
+    else {
+        $Output += '"No name","'
+    }
+    
+    if($obj.getvalue('displayversion') -ne $null) {
+        $Output += $obj.GetValue('DisplayVersion').Replace('"', "'") + '",'
+    }
+    else {
+        $Output += 'No version",'
+    }
+    
+    $Output = $Output.Replace("`n", '; ').Replace("`r", '')
+}
+
+return $Output
